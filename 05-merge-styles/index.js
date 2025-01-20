@@ -33,4 +33,4 @@ fs.readdir(dirStyle, { withFileTypes: true }, (err, file) => {
     }
   });
 });
-console.log('Файл собран!');
+console.log('Файл собран!!');
