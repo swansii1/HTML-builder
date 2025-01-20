@@ -23,7 +23,7 @@ fs.mkdir(projectDist, { recursive: true }, (err) => {
 function buildHtml() {
   fs.readFile(templatePath, 'utf-8', (err, template) => {
     if (err) {
-      console.error('Ошибка чтения template');
+      console.error('Ошибка чтения template!');
       return;
     }
     let start = 0;
