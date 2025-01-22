@@ -4,34 +4,34 @@ const path = require('path');
 const copyFolder = path.join(__dirname, 'copy-files');
 const pathFolderCopy = path.join(__dirname, 'files');
 
-fs.mkdir(copyFolder, { recursive: true }, (err) => {
-  if (err) {
-    console.log('Ошибка!');
-  } else {
-    console.log('Папка создана!\n');
-
-    copyDir(pathFolderCopy, copyFolder);
-  }
-});
-
-function copyDir(src, destDir) {
-  fs.readdir(src, (err, files) => {
+function copyDir(src, dest) {
+  fs.rm(dest, { recursive: true }, (err) => {
     if (err) {
-      console.log('Ошибка');
+      console.log('Ошибка при обновлении/удалении папки:', err);
       return;
     }
-
-    files.forEach((item) => {
-      const srcFile = path.join(src, item);
-      const desFile = path.join(destDir, item);
-
-      fs.copyFile(srcFile, desFile, (err) => {
+    fs.mkdir(dest, (err) => {
+      if (err) {
+        console.log('Ошибка при создании папки:', err);
+        return;
+      }
+      fs.readdir(src, (err, files) => {
         if (err) {
-          console.log('Ошибка при копировании!');
-        } else {
-          console.log(`Скопирован:\n ${srcFile}\nв\n ${desFile}!`);
+          console.log('Ошибка при чтении папки:', err);
+          return;
         }
+        files.forEach((file) => {
+          const srcFile = path.join(src, file);
+          const destFile = path.join(dest, file);
+
+          fs.copyFile(srcFile, destFile, (err) => {
+            if (err) {
+              console.log(`Ошибка при копировании файла ${file}:`, err);
+            }
+          });
+        });
       });
     });
   });
 }
+copyDir(pathFolderCopy, copyFolder);
