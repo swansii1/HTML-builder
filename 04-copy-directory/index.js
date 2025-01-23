@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const copyFolder = path.join(__dirname, 'copy-files');
+const copyFolder = path.join(__dirname, 'files-copy');
 const pathFolderCopy = path.join(__dirname, 'files');
 
 function copyDir(src, dest) {
