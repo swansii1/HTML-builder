@@ -18,7 +18,7 @@ fs.readdir(pathFolder, { withFileTypes: true }, (err, files) => {
             const name = path.basename(pathFile, path.extname(pathFile));
             const extension = path.extname(pathFile);
             console.log(
-              `${name} - ${extension.slice(1)} - ${stat.size / 1000} kB`,
+              `${name} - ${extension.slice(1)} - ${stat.size / 1024} kB`,
             );
           }
         });
